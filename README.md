@@ -11,9 +11,12 @@ sha1
 
 I am sure you can get them through LuaRocks stuff, but...
 Here you can obtain them:
-[bit32](http://www.snpedia.com/extensions/Scribunto/engines/LuaCommon/lualib/bit32.lua)
-[basexx](https://github.com/aiq/basexx/blob/master/lib/basexx.lua)
-[sha1](https://github.com/kikito/sha1.lua)
+>[bit32](http://www.snpedia.com/extensions/Scribunto/engines/LuaCommon/lualib/bit32.lua)
+
+>[basexx](https://github.com/aiq/basexx/blob/master/lib/basexx.lua)
+
+>[sha1](https://github.com/kikito/sha1.lua)
+
 
 You will need to configure the paths of the requires of this library. I am guessing you don't compile everything into one directory, but whatever. It is simple and quick. Everything is already preconfigured to be manipulated there, just replace the path.
 
