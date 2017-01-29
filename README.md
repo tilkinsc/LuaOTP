@@ -24,4 +24,6 @@ You will need to configure the paths of the requires of this library. I am guess
 This was actually a spawn off pyotp, but I would necessarily say the code was copied. Things in python aren't in lua, therefore I had to make the methods myself. However, credits will go to the module for providing a guideline of what to do. [Here](https://github.com/pyotp/pyotp) you can find pyotp and realize how different it really is.
 
 
+_____________
 
+How to use is pretty simple. Just pick either TOTP or HOTP, then take the respective lua file with OTP, util, and the libraries, and use them. You may have to set up the paths to the requires at the top. You will only need util if you are going to generated a random base32. You can access this by otp.util.* anyways.
