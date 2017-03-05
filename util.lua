@@ -1,3 +1,4 @@
+
 local util = {}
 
 util.default_chars = {
@@ -34,22 +35,11 @@ util.encode_url = function(url, protocol)
 end
 
 util.build_uri = function(secret, name, initial_count, issuer_name, algorithm, digits, period)
-	local is_init_set = initial_count ~= nil
-	
-	local is_algo_set = (algorithm ~= nil) and algorithm ~= "sha1"
-	local is_digi_set = digits ~= nil
-	local is_peri_set = period ~= nil
-	
-	local otp_type = is_init_set and "hotp" or "totp"
-	
 	local label = util.encode_url(name)
+	label = issuer_name and util.encode_url(issuer_name) .. ':' .. label or ""
 	
-	if (issuer_name ~= nil) then
-		label = util.encode_url(issuer_name) .. ':' .. label
-	end
-	if(is_algo_set)then
-		algorithm = string.upper(algorithm)
-	end
+	algorithm = algorithm and string.upper(algorithm) or ""
+	
 	local url_args = {
 		secret = secret,
 		issuer = issuer_name,
@@ -58,18 +48,16 @@ util.build_uri = function(secret, name, initial_count, issuer_name, algorithm, d
 		digits = digits,
 		period = period
 	}
-	return string.format(util.base_uri, otp_type, label, util.build_args(url_args))
+	return string.format(util.base_uri, initial_count ~= nil and "hotp" or "totp", label, util.build_args(url_args))
 end
 
 util.strings_equal = function(s1, s2)
-	local matches = true
 	for i=1, #s1 do
 		if(s1:sub(i,i) ~= s2:sub(i,i))then
-			matches = false
-			break
+			return false
 		end
 	end
-	return matches
+	return true
 end
 
 util.arr_reverse = function(tab)

@@ -13,8 +13,7 @@ hotp.verify = function(instance, key, counter)
 end
 
 hotp.as_uri = function(instance, name, initial_count, issuer_name)
-	initial_count = initial_count or 0
-	return util.build_uri(instance.secret, name, initial_count, issuer_name, instance.digest, instance.digits)
+	return util.build_uri(instance.secret, name, initial_count or 0, issuer_name, instance.digest, instance.digits)
 end
 
 return hotp

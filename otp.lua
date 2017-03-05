@@ -67,13 +67,12 @@ otp.byte_secret = function(instance)
 end
 
 otp.int_to_bytestring = function(i, padding)
-	padding = padding or 8
 	local bytes = {}
 	while (i ~= 0) do
 		table.insert(bytes, bit32.band(i, 0xFF))
 		i = bit32.rshift(i, 8)
 	end
-	return string.rep('\0', math.max(0, padding - #bytes)) .. util.byte_arr_tostring(util.arr_reverse(bytes))
+	return string.rep('\0', math.max(0, (padding or 8) - #bytes)) .. util.byte_arr_tostring(util.arr_reverse(bytes))
 end
 
 otp.random_base32 = function(length, chars)
