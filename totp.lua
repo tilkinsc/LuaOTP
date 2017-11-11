@@ -15,6 +15,11 @@ totp.now = function(instance)
 	return otp.generate_otp(instance, totp.timecode(instance, os.time()))
 end
 
+totp.valid_until = function(instance, for_time, valid_window)
+	valid_window = valid_window or 0
+	return for_time + ((self.interval + 1) * valid_window)
+end
+
 totp.verify = function(instance, key, for_time, valid_window)
 	valid_window = valid_window or 0
 	for_time = for_time or os.time()
