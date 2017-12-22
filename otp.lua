@@ -1,8 +1,9 @@
 
 -- please point these to proper location
-local basexx = require("basexx.lua")
-local sha1 = require("sha1.lua")
-local util = require("util.lua")
+local basexx = require("basexx")
+local sha1 = require("sha1")
+local util = require("util")
+local bit32 = require("bit32")
 
 local otp = {
 	util = util
@@ -50,7 +51,7 @@ otp.generate_otp = function(instance, input)
 		bit32.lshift(bit32.band(bhash[offset + 3], 0xFF), 0)
 	)
 	
-	local str_code = tostring(code % math.pow(10, instance.digits))
+	local str_code = tostring(math.floor(code % (10 ^ instance.digits)))
 	while #str_code < instance.digits do
 		str_code = '0' .. str_code
 	end
@@ -59,7 +60,7 @@ otp.generate_otp = function(instance, input)
 end
 
 otp.byte_secret = function(instance)
-	local missing_padding = #instance.secret % 8
+	local missing_padding = #(instance.secret) % 8
 	if (missing_padding ~= 0) then
 		instance.secret = instance.secret .. string.rep('=', (8 - missing_padding))
 	end

@@ -41,13 +41,15 @@ util.build_uri = function(secret, name, initial_count, issuer_name, algorithm, d
 	algorithm = algorithm and string.upper(algorithm) or ""
 	
 	local url_args = {
-		secret = secret,
+		secret = tostringsecret,
 		issuer = issuer_name,
-		counter = initial_count,
+		counter = tostring(initial_count),
 		algorithm = algorithm,
-		digits = digits,
-		period = period
+		digits = tostring(digits)
 	}
+	if(initial_count == nil) then
+		url_args.period = tostring(period)
+	end
 	return string.format(util.base_uri, initial_count ~= nil and "hotp" or "totp", label, util.build_args(url_args))
 end
 

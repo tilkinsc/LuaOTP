@@ -1,6 +1,6 @@
 
 -- please point this to proper location
-local otp = require("otp.lua")
+local otp = require("otp")
 
 local totp = {}
 
@@ -26,17 +26,13 @@ totp.verify = function(instance, key, for_time, valid_window)
 	
 	if (valid_window > 0) then
 		for i=-valid_window, valid_window, 1 do
-			if (util.strings_equal(tostring(key), tostring(totp.at(instance, for_time, i)))) then
+			if (tostring(key) == tostring(totp.at(instance, for_time, i))) then
 				return true
 			end
 		end
 		return false
 	end
-	return util.strings_equal(tostring(key), tostring(totp.at(instance, for_time)))
-end
-
-totp.as_uri = function(instance, name, issuer_name)
-	return util.build_uri(instance.secret, name, nil, issuer_name, instance.digest, instance.digits, instance.interval)
+	return tostring(key) == tostring(totp.at(instance, for_time))
 end
 
 totp.timecode = function(instance, for_time)

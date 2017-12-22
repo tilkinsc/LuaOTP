@@ -1,6 +1,6 @@
 
 -- please point this to proper location
-local otp = require("otp.lua")
+local otp = require("otp")
 
 local hotp = {}
 
@@ -9,11 +9,7 @@ hotp.at = function(instance, count)
 end
 
 hotp.verify = function(instance, key, counter)
-	return util.strings_equal(key, hotp.at(instance, counter))
-end
-
-hotp.as_uri = function(instance, name, initial_count, issuer_name)
-	return util.build_uri(instance.secret, name, initial_count or 0, issuer_name, instance.digest, instance.digits)
+	return tostring(key) == tostring(hotp.at(instance, counter))
 end
 
 return hotp
