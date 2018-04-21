@@ -30,11 +30,6 @@ You will need to configure the paths of the requires of this library. I am guess
 When it comes down to it, this library will convert your integer numbers to string and do a comparison byte by byte. There is no need for expensive testing - nobody knows what is going on except the key holders and the key can't be reversed because we only send a small part of the hmac. That being said, there is no support for digits > 9 yet - as this is half an int's limit.
 
 
-## Description
-
-This was actually a spawn off pyotp, but I would necessarily say the code was copied. Things in python aren't in lua, therefore I had to make the methods myself. However, credits will go to the module for providing a guideline of what to do. [Here](https://github.com/pyotp/pyotp) you can find pyotp and realize how different it really is.
-
-
 _____________
 
 ## License
