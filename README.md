@@ -6,6 +6,8 @@ A simple One Time Password (OTP) library in lua
 
 Compatible with Authy and Google Authenticator. Full support for QR code url is provided.
 
+Copyright (c) 2021 Cody Tilkins MIT
+
 
 ## Libraries Needed
 
@@ -53,5 +55,4 @@ To use this library, pick either TOTP or HOTP then use the provided files - givi
 * Add comments - there are lacking comments, should match up to COTP's style
 * Remove the dependancy on basexx - I have an implementation found in COTP and JOTP that can be ported.
 * bit32 isn't actually an external dependancy, but depending on the version you prefer, it is
-* sha1 make sure we aren't infringing anything with this
 
