@@ -14,6 +14,7 @@ local DIGEST 		= "SHA1";
 local OTP  = require("otp")
 local TOTP = require("totp")
 local HOTP = require("hotp")
+local UTIL = require("util")
 
 
 -- Create OTPData struct, which decides the environment
@@ -74,7 +75,7 @@ math.random(1, 2)
 
 local base32_len = 16
 
-local base32_new_secret = OTP.random_base32(base32_len, OTP.util.default_chars)
+local base32_new_secret = UTIL.random_base32(base32_len, OTP.util.default_chars)
 print("Generated BASE32 Secret: `" .. base32_new_secret .. "`")
 
 print("") -- line break for readability

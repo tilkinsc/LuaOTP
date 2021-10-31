@@ -77,4 +77,14 @@ util.str_to_byte = function(str)
 	return out
 end
 
+util.random_base32 = function(length, chars)
+	length = length or 16
+	chars = chars or util.default_chars
+	local out = ""
+	for i=1, length do
+		out = out .. chars[math.random(1, #chars)]
+	end
+	return out
+end
+
 return util

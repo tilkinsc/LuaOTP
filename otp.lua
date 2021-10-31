@@ -39,6 +39,10 @@ end
 
 
 otp.generate_otp = function(instance, input)
+	if (input < 0) then
+		return nil
+	end
+	
 	local hash = sha1.hmac_binary(otp.byte_secret(instance), otp.int_to_bytestring(input))
 	local offset = bit32.band(string.byte(hash:sub(-1, -1)), 0xF) + 1
 	
@@ -74,16 +78,6 @@ otp.int_to_bytestring = function(i, padding)
 		i = bit32.rshift(i, 8)
 	end
 	return string.rep('\0', math.max(0, (padding or 8) - #bytes)) .. util.byte_arr_tostring(util.arr_reverse(bytes))
-end
-
-otp.random_base32 = function(length, chars)
-	length = length or 16
-	chars = chars or util.default_chars
-	local out = ""
-	for i=1, length do
-		out = out .. chars[math.random(1, #chars)]
-	end
-	return out
 end
 
 return otp

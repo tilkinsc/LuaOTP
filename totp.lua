@@ -5,14 +5,11 @@ local otp = require("otp")
 local totp = {}
 
 totp.at = function(instance, for_time, counter_offset)
-	if (for_time == nil) then
-		error("No for_time supplied.")
-	end
 	return otp.generate_otp(instance, totp.timecode(instance, tonumber(for_time)) + (counter_offset or 0))
 end
 
-totp.now = function(instance)
-	return otp.generate_otp(instance, totp.timecode(instance, os.time()))
+totp.now = function(instance, override)
+	return otp.generate_otp(instance, totp.timecode(instance, override or os.time()))
 end
 
 totp.valid_until = function(instance, for_time, valid_window)
